@@ -1,0 +1,11 @@
+# Ignore everything
+
+/*
+
+# Except
+
+!src
+!.babelrc
+!.gitignore
+!package.json
+!package-lock.json
