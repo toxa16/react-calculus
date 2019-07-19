@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class NumberButton extends React.Component {
+export default class DigitButton extends React.Component {
   render() {
     return (
       <button onClick={ () => this.props.onClick() }>

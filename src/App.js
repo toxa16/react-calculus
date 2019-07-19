@@ -1,7 +1,7 @@
 import React from 'react';
 
 import NumberDisplay from './NumberDisplay';
-import NumberButton from './NumberButton';
+import DigitButton from './DigitButton';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -94,26 +94,26 @@ export default class App extends React.Component {
         </div>
         <br />
         <div>
-          <NumberButton value="7" onClick={ () => this.handleNumberClick(7) } />
-          <NumberButton value="8" onClick={ () => this.handleNumberClick(8) } />
-          <NumberButton value="9" onClick={ () => this.handleNumberClick(9) } />
+          <DigitButton value="7" onClick={ () => this.handleNumberClick(7) } />
+          <DigitButton value="8" onClick={ () => this.handleNumberClick(8) } />
+          <DigitButton value="9" onClick={ () => this.handleNumberClick(9) } />
           <button onClick={ () => this.handleActionClick('divide') }>/</button>
           <button onClick={ () => this.handleClearClick() }>Clear</button>
         </div>
         <div>
-          <NumberButton value="4" onClick={ () => this.handleNumberClick(4) } />
-          <NumberButton value="5" onClick={ () => this.handleNumberClick(5) } />
-          <NumberButton value="6" onClick={ () => this.handleNumberClick(6) } />
+          <DigitButton value="4" onClick={ () => this.handleNumberClick(4) } />
+          <DigitButton value="5" onClick={ () => this.handleNumberClick(5) } />
+          <DigitButton value="6" onClick={ () => this.handleNumberClick(6) } />
           <button onClick={ () => this.handleActionClick('multiply') }>*</button>
         </div>
         <div>
-          <NumberButton value="1" onClick={ () => this.handleNumberClick(1) } />
-          <NumberButton value="2" onClick={ () => this.handleNumberClick(2) } />
-          <NumberButton value="3" onClick={ () => this.handleNumberClick(3) } />
+          <DigitButton value="1" onClick={ () => this.handleNumberClick(1) } />
+          <DigitButton value="2" onClick={ () => this.handleNumberClick(2) } />
+          <DigitButton value="3" onClick={ () => this.handleNumberClick(3) } />
           <button onClick={ () => this.handleActionClick('substract') }>-</button>
         </div>
         <div>
-          <NumberButton value="0" onClick={ () => this.handleNumberClick(0) } />
+          <DigitButton value="0" onClick={ () => this.handleNumberClick(0) } />
           <button>.</button>
           <button onClick={ this.handleEqualClick.bind(this) }>=</button>
           <button onClick={ () => this.handleActionClick('add') }>+</button>
