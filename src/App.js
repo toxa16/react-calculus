@@ -54,6 +54,9 @@ export default class App extends React.Component {
       case 'add': {
         return state.prevOperand + state.value;
       }
+      case 'substract': {
+        return state.prevOperand - state.value;
+      }
       default: {
         return state.value;
       }
@@ -94,7 +97,7 @@ export default class App extends React.Component {
           <NumberButton value="1" onClick={ () => this.handleNumberClick(1) } />
           <NumberButton value="2" onClick={ () => this.handleNumberClick(2) } />
           <NumberButton value="3" onClick={ () => this.handleNumberClick(3) } />
-          <button>-</button>
+          <button onClick={ () => this.handleActionClick('substract') }>-</button>
         </div>
         <div>
           <NumberButton value="0" onClick={ () => this.handleNumberClick(0) } />
