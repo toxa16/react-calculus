@@ -151,11 +151,11 @@ export default class App extends React.Component {
         <br />
         <div>
           <small>
-            <div>action: { this.state.action }</div>
-            <div>decimalRank: { this.state.decimalRank }</div>
-            <div>isNewOperand: { this.state.isNewOperand.toString() }</div>
-            <div>prevOperand: { this.state.prevOperand }</div>
-            <div>value: { this.state.value }</div>
+            <span style={ { marginRight: '20px' } }>action: { this.state.action }</span>
+            <span style={ { marginRight: '20px' } }>decimalRank: { this.state.decimalRank }</span>
+            <span style={ { marginRight: '20px' } }>isNewOperand: { this.state.isNewOperand.toString() }</span>
+            <span style={ { marginRight: '20px' } }>prevOperand: { this.state.prevOperand }</span>
+            <span>value: { this.state.value }</span>
           </small>
         </div>
       </div>
