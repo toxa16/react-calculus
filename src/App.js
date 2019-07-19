@@ -63,6 +63,13 @@ export default class App extends React.Component {
       case 'multiply': {
         return state.prevOperand * state.value;
       }
+      case 'divide': {
+        if (state.value === 0) {
+          return 0;   // TODO: division by zero
+        } else {
+          return state.prevOperand / state.value;
+        }
+      }
       default: {
         return state.value;
       }
@@ -90,7 +97,7 @@ export default class App extends React.Component {
           <NumberButton value="7" onClick={ () => this.handleNumberClick(7) } />
           <NumberButton value="8" onClick={ () => this.handleNumberClick(8) } />
           <NumberButton value="9" onClick={ () => this.handleNumberClick(9) } />
-          <button>/</button>
+          <button onClick={ () => this.handleActionClick('divide') }>/</button>
           <button onClick={ () => this.handleClearClick() }>Clear</button>
         </div>
         <div>
