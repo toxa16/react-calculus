@@ -8,21 +8,31 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       action: null,
+      decimalRank: 0,
       isNewOperand: false,
       prevOperand: 0,
       value: 0,
     };
   }
 
-  handleNumberClick(num) {
+  handleDigitClick(num) {
     this.setState(state => {
+      let decimalRank = state.decimalRank;
       let value;
       if (state.isNewOperand) {
         value = num;
+      } else if (decimalRank !== 0) {
+        let divider = 1;
+        for (let i = 0; i < decimalRank; i++) {
+          divider *= 10;
+        }
+        value = state.value + num / divider;
+        decimalRank++;
       } else {
         value = state.value * 10 + num;
       }
       return {
+        decimalRank,
         isNewOperand: false,
         value,
       }
@@ -34,6 +44,7 @@ export default class App extends React.Component {
       const result = this.calculate(state);
       return {
         action,
+        decimalRank: 0,
         isNewOperand: true,
         prevOperand: result,
         value: result,
@@ -45,7 +56,8 @@ export default class App extends React.Component {
     this.setState(state => {
       return {
         action: null,
-        isNewOperand: false,
+        decimalRank: 0,
+        isNewOperand: true,
         prevOperand: 0,
         value: this.calculate(state),
       }
@@ -76,9 +88,27 @@ export default class App extends React.Component {
     }
   }
 
+  handlePointClick() {
+    this.setState(state => {
+      if (state.isNewOperand) {
+        return {
+          decimalRank: 1,
+          isNewOperand: false,
+          value: 0,
+        }
+      } else if (state.decimalRank !== 0) {
+        return {};
+      }
+      return {
+        decimalRank: 1,
+      }
+    });
+  }
+
   handleClearClick() {
     this.setState({
       action: null,
+      decimalRank: 0,
       isNewOperand: false,
       prevOperand: 0,
       value: 0,
@@ -94,29 +124,39 @@ export default class App extends React.Component {
         </div>
         <br />
         <div>
-          <DigitButton value="7" onClick={ () => this.handleNumberClick(7) } />
-          <DigitButton value="8" onClick={ () => this.handleNumberClick(8) } />
-          <DigitButton value="9" onClick={ () => this.handleNumberClick(9) } />
+          <DigitButton value="7" onClick={ () => this.handleDigitClick(7) } />
+          <DigitButton value="8" onClick={ () => this.handleDigitClick(8) } />
+          <DigitButton value="9" onClick={ () => this.handleDigitClick(9) } />
           <button onClick={ () => this.handleActionClick('divide') }>/</button>
           <button onClick={ () => this.handleClearClick() }>Clear</button>
         </div>
         <div>
-          <DigitButton value="4" onClick={ () => this.handleNumberClick(4) } />
-          <DigitButton value="5" onClick={ () => this.handleNumberClick(5) } />
-          <DigitButton value="6" onClick={ () => this.handleNumberClick(6) } />
+          <DigitButton value="4" onClick={ () => this.handleDigitClick(4) } />
+          <DigitButton value="5" onClick={ () => this.handleDigitClick(5) } />
+          <DigitButton value="6" onClick={ () => this.handleDigitClick(6) } />
           <button onClick={ () => this.handleActionClick('multiply') }>*</button>
         </div>
         <div>
-          <DigitButton value="1" onClick={ () => this.handleNumberClick(1) } />
-          <DigitButton value="2" onClick={ () => this.handleNumberClick(2) } />
-          <DigitButton value="3" onClick={ () => this.handleNumberClick(3) } />
+          <DigitButton value="1" onClick={ () => this.handleDigitClick(1) } />
+          <DigitButton value="2" onClick={ () => this.handleDigitClick(2) } />
+          <DigitButton value="3" onClick={ () => this.handleDigitClick(3) } />
           <button onClick={ () => this.handleActionClick('substract') }>-</button>
         </div>
         <div>
-          <DigitButton value="0" onClick={ () => this.handleNumberClick(0) } />
-          <button>.</button>
+          <DigitButton value="0" onClick={ () => this.handleDigitClick(0) } />
+          <button onClick={ this.handlePointClick.bind(this) }>.</button>
           <button onClick={ this.handleEqualClick.bind(this) }>=</button>
           <button onClick={ () => this.handleActionClick('add') }>+</button>
+        </div>
+        <br />
+        <div>
+          <small>
+            <div>action: { this.state.action }</div>
+            <div>decimalRank: { this.state.decimalRank }</div>
+            <div>isNewOperand: { this.state.isNewOperand.toString() }</div>
+            <div>prevOperand: { this.state.prevOperand }</div>
+            <div>value: { this.state.value }</div>
+          </small>
         </div>
       </div>
     );
