@@ -20,7 +20,7 @@ export default class App extends React.Component {
       if (state.isNewOperand) {
         value = num;
       } else {
-        value = state.value * 10 + num
+        value = state.value * 10 + num;
       }
       return {
         isNewOperand: false,
@@ -30,12 +30,15 @@ export default class App extends React.Component {
   }
 
   handleActionClick(action) {
-    this.setState(state => ({
-      action,
-      isNewOperand: true,
-      prevOperand: state.value,
-      value: this.calculate(state),
-    }));
+    this.setState(state => {
+      const result = this.calculate(state);
+      return {
+        action,
+        isNewOperand: true,
+        prevOperand: result,
+        value: result,
+      }
+    });
   }
 
   handleEqualClick() {
@@ -56,6 +59,9 @@ export default class App extends React.Component {
       }
       case 'substract': {
         return state.prevOperand - state.value;
+      }
+      case 'multiply': {
+        return state.prevOperand * state.value;
       }
       default: {
         return state.value;
@@ -91,7 +97,7 @@ export default class App extends React.Component {
           <NumberButton value="4" onClick={ () => this.handleNumberClick(4) } />
           <NumberButton value="5" onClick={ () => this.handleNumberClick(5) } />
           <NumberButton value="6" onClick={ () => this.handleNumberClick(6) } />
-          <button>*</button>
+          <button onClick={ () => this.handleActionClick('multiply') }>*</button>
         </div>
         <div>
           <NumberButton value="1" onClick={ () => this.handleNumberClick(1) } />
