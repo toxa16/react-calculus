@@ -34,31 +34,36 @@ export default class App extends React.Component {
       action,
       isNewOperand: true,
       prevOperand: state.value,
+      value: this.calculate(state),
     }));
   }
 
   handleEqualClick() {
     this.setState(state => {
-      let value;
-      switch (state.action) {
-        case 'add': {
-          value = state.prevOperand + state.value;
-          break;
-        }
-        default: {
-          value = state.value;
-        }
-      }
       return {
         action: null,
+        isNewOperand: false,
         prevOperand: 0,
-        value,
+        value: this.calculate(state),
       }
     });
   }
 
+  calculate(state) {
+    switch (state.action) {
+      case 'add': {
+        return state.prevOperand + state.value;
+      }
+      default: {
+        return state.value;
+      }
+    }
+  }
+
   handleClearClick() {
     this.setState({
+      action: null,
+      isNewOperand: false,
       prevOperand: 0,
       value: 0,
     });
